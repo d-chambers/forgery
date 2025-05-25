@@ -1,0 +1,33 @@
+[build-system]
+requires = [ "setuptools>=41", "scikit-build"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project]
+name = "forgery"
+version = "0.1.0"
+description = "Code used to "
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy",
+    "pandas",
+    "utm",
+    "ipywidgets",
+    "jupyter",
+    "trame",
+    "trame-vtk",
+    "trame-vuetify",
+    "pytest",
+    "geopandas>=1.0.1",
+    "altair>=5.5.0",
+    "pint>=0.24.4",
+    "pythreejs>=2.4.2",
+    "panel>=1.7.0",
+    "pyvista[all]>=0.45.2",
+]

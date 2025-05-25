@@ -1,0 +1,126 @@
+---
+title: Understanding Seismic Activity During the 2024 Forge Circulation Test
+execute:
+  enabled: true
+embed-resources: false
+jupyter: python3
+---
+
+
+The [Utah FORGE](https://utahforge.com/) (Frontier Observatory for Research in Geothermal Energy) recently conducted a test to determine how well fluids can circulate between a newly developed pair of wells. Fluid was injected into one well, flowed through previously fractured hot dry rocks, then traveled up the second well at a much higher temperature. The fluid flow and temperature at the second well indicate energy production potential. 
+
+During geothermal production, small seismic events (earthquakes) occur deep underground. Most of these events are very small and go unnoticed. Rarely, however, moderately-sized events can occur and cause shaking on the surface. To help manage these risks, FORGE implements a [comprehensive traffic light system (TLS)](https://data.openei.org/submissions/8325) based on the number, magnitude, and location of earthquakes occurring near the production site. The TLS outlines actions that are taken when larger events begin to occur, helping reduce the severity of additional seismic activity.
+
+This post discusses what we know so far about seismicity related to the FORGE circulation test.
+
+## Observations
+
+During the test, 2,817 events were detected and located with most events having a magnitude less than 1 (@fig-mag_time). There was one magnitude 2 event that triggered a yellow status on April 7, and a magnitude 3.1 that triggered a red alert on April 15.
+
+Although the investigation into the magnitude 3.1 event is underway, it is important to keep in mind that this earthquake is still quite small and unlikely to cause damage. For example, the United States Geological Survey indicates earthquakes don't usually cause damage below magnitude 4 or 5[^a] and, for comparison, California regularly experiences over 50 earthquakes above magnitude 3.0 each month [^b].
+
+
+```{python}
+#| echo: false
+#| label: fig-mag_time
+#| fig-cap: Seismic events and magnitudes associated with the circulation test. The vertical lines show the times a TLS alert was issued. 
+
+from forgery.data import shp_data, csv_data, get_well_data
+from forgery.plot import plot_event_mag_time
+
+df = csv_data['events']
+# boundary = shp_data['extents']
+chart = (
+    plot_event_mag_time(df)
+    .properties(
+        width=550,
+        height=400,
+    )
+    .configure_axis(
+        labelFontSize=18,
+        titleFontSize=18,
+        labelAngle = 0
+    )
+    .configure_title(
+        fontSize = 25,
+    )
+    .configure_legend(
+        labelFontSize = 20,
+        titleFontSize = 23,
+    )
+)
+    
+chart.show()
+```
+
+Examining the event locations (@fig-event_map), earthquakes tend to cluster along two distinct zones elongated in the north–south direction. This could indicate fluid moving along existing joints or faults oriented in this direction.   
+
+
+```{python}
+#| echo: false
+#| label: fig-event_map
+#| fig-cap: Seismic events (dots) sized according to magnitude and colored by depth. Also shown are the wells (gray lines) and permit boundaries (green line).  
+
+
+from forgery.data import shp_data, csv_data, get_well_data
+
+from forgery.plot import plot_map_2d
+
+df = csv_data['events']
+permit = shp_data['extents'].iloc[1]['geometry']
+well_map = get_well_data()
+chart = (
+    plot_map_2d(df, permit, well_dict=well_map)
+    .properties(
+        width=505,
+        height=505,
+    )
+    .configure_axis(
+        labelFontSize=20,
+        titleFontSize=20,
+        labelAngle = 0
+    )
+    .configure_title(
+        fontSize = 25,
+    )
+    .configure_legend(
+        labelFontSize = 20,
+        titleFontSize = 23,
+    )
+)
+
+chart.show()
+```
+
+The following figure provides an interactive view of the events with magnitude >= -0.5 in relation to the surface, the granitoid (the igneous rock where the heat is stored), and the wells.
+
+
+```{python}
+#| echo: false
+#| warning: false
+
+#| label: fig-event_3d_map
+#| fig-cap: 3D interactive map showing the wells (gray), surface (blue), granitoid (red), and seismic events (spheres).  
+
+from forgery.vista import ForgeVistaScene
+
+pl = scene = ForgeVistaScene()()
+pl.show(jupyter_backend="html")
+```
+
+## Why This Matters
+
+Induced seismicity can raise concerns. That’s why the Utah FORGE team takes proactive steps:
+
+- Real-time monitoring ensures a swift operational response.
+
+- Transparency with regulators and the public helps maintain trust.
+
+- Data-informed modeling supports safer future geothermal developments.
+
+This test demonstrates that well-designed experiments, supported by real-time monitoring, help advance geothermal technology without compromising public safety.
+
+
+[^a]: [What magnitude does damage begin?](https://www.usgs.gov/faqs/what-magnitude-does-damage-begin-occur-earthquake) 
+
+[^b]: [Are we ready for the big one?](https://www.nbcsandiego.com/news/local/series-of-earthquakes-shake-socal-are-we-prepared-for-the-big-one/3610798/#:~:text=In%20California%2C%2055%20earthquakes%20of,and%20occurred%20in%20Southern%20California)
