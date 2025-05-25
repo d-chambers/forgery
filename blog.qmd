@@ -1,6 +1,6 @@
 ---
 title: Understanding Seismic Activity During the 2024 Forge Circulation Test
-embed-resources: false
+embed-resources: true
 format:
   html:
     css: custom.css
