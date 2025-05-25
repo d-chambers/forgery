@@ -1,11 +1,11 @@
 ---
 title: Understanding Seismic Activity During the 2024 Forge Circulation Test
-execute:
-  enabled: true
 embed-resources: false
+format:
+  html:
+    css: custom.css
 jupyter: python3
 ---
-
 
 The [Utah FORGE](https://utahforge.com/) (Frontier Observatory for Research in Geothermal Energy) recently conducted a test to determine how well fluids can circulate between a newly developed pair of wells. Fluid was injected into one well, flowed through previously fractured hot dry rocks, then traveled up the second well at a much higher temperature. The fluid flow and temperature at the second well indicate energy production potential. 
 

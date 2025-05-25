@@ -2,7 +2,7 @@
 
 This is a simple repo to create a blog post about a fictional circulation test at the UTAH FORGE geothermal site. 
 
-Click [here](https://username.github.io/repo-name/index.html) to see the blog.
+Click [here](https://d-chambers.github.io/forgery/index.html) to see the blog.
 
 To create the post, first [install quarto](https://quarto.org/docs/get-started/) and [uv](https://docs.astral.sh/uv/getting-started/installation/) for your platform. Next, run the following commands:
 
