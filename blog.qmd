@@ -7,23 +7,73 @@ format:
 jupyter: python3
 ---
 
-The [Utah FORGE](https://utahforge.com/) (Frontier Observatory for Research in Geothermal Energy) recently conducted a test to determine how well fluids can circulate between a newly developed pair of wells. Fluid was injected into one well, flowed through previously fractured hot dry rocks, then traveled up the second well at a much higher temperature. The fluid flow and temperature at the second well indicate energy production potential. 
+The [Utah FORGE](https://utahforge.com/) (Frontier Observatory for Research in Geothermal Energy) recently conducted a
+test to determine how well fluids can circulate between a newly developed pair of wells. Fluid was injected into the injection well, flowed through previously fractured hot dry rocks, and then traveled up the production well at a much higher
+temperature.
+The fluid flow and temperature at the production well indicate energy generation potential.
 
-During geothermal production, small seismic events (earthquakes) occur deep underground. Most of these events are very small and go unnoticed. Rarely, however, moderately-sized events can occur and cause shaking on the surface. To help manage these risks, FORGE implements a [comprehensive traffic light system (TLS)](https://data.openei.org/submissions/8325) based on the number, magnitude, and location of earthquakes occurring near the production site. The TLS outlines actions that are taken when larger events begin to occur, helping reduce the severity of additional seismic activity.
+During geothermal production, small seismic events (earthquakes) occur deep underground. Most of these events are very
+small and go unnoticed. Rarely, however, moderately sized events can occur and cause shaking on the surface. To help
+manage these risks, FORGE implements
+a [comprehensive Traffic Light System (TLS)](https://data.openei.org/submissions/8325). This post explains the TLS and
+what we know so far about seismicity related to the FORGE circulation test.
 
-This post discusses what we know so far about seismicity related to the FORGE circulation test.
+## Traffic Light System
+
+The TLS outlines **responses** that are taken when signs of potential seismic issues (**triggers**) are detected. There
+are different TLS for circulation/stimulation conditions versus production conditions. Additionally, the TLS make a
+distinction between events occurring on the FORGE site versus at neighboring geothermal sites. For simplicity, this
+section only describes the TLS for events occurring near the FORGE site during a circulation test.
+
+The **triggers** for the TLS include:
+
+- **Normal**: No anomalous activity (defined below) detected.
+- **10M≥1(3km)**: 10 or more events with magnitude 1 or greater located within 3 km of the reservoir in a 24-hour period.
+- **Fault plane**: Events appear to propagate along an imaged fault plane.
+- **Stimulation zone**: Events cluster in a single stimulation zone.
+- **M≥2(3km)**: An event with a magnitude 2 or greater occurred within 3 km of the reservoir.
+- **M≥3(5km)**: An event with a magnitude 3 or greater occurred within 5 km of the reservoir.
+- **M≥3(5-15km)**: An event with a magnitude 3 or greater occurred between 5 and 15 km of the reservoir.
+
+The **responses** for the TLS are:
+
+- **No action**: Continue operation as planned.
+- **Notify WSM**: Inform the Well Site Manager (WSM) of the activity. The WSM will inform other entities as needed.
+- **Reduce injection**: Decrease fluid injection volume to lower reservoir pressure.
+- **Flowback**: Allow fluid to flow back up the injection well to gradually reduce reservoir pressure.
+- **Open shut-ins**: Open all nearby shut-in wells (excluding the production and injection wells) to allow additional
+  pressure release.
+- **Shutdown**: Cease all operations until the appropriate parties are contacted and a plan is developed.
+- **Secure well**: When safe to do so, disassemble all equipment used for injection.
+
+:::{ .table .striped .hover .bordered style="font-size:90%;" .table-green .table-amber .table-red}
+| Trigger | Response |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| Normal | No action. |
+| 10M≥1(3km)                     | Notify WSM. |
+| 10M≥1(3km) and stimulation zone | Open shut-ins, reduce injection by 10%. If more M≥1(3km) events occur, continue to reduce
+injection by 10% increments. When green conditions return continue with operational plan. |
+| 10M≥1(3km) and fault plane | Open shut-ins, flowback |
+| M≥2(3km)                       | Notify WSM, shutdown |
+| M≥3(5km)                       | Notify WSM, flowback, secure well |
+| M≥3(5-15km)                    | Notify WSM, flowback, secure well |
+:::
 
 ## Observations
 
-During the test, 2,817 events were detected and located with most events having a magnitude less than 1 (@fig-mag_time). There was one magnitude 2 event that triggered a yellow status on April 7, and a magnitude 3.1 that triggered a red alert on April 15.
+During the test, 2,817 events were detected and located with most events having a magnitude less than 1 (@fig-mag_time).
+There was one magnitude 2 event that triggered a yellow status on April 7, and a magnitude 3.1 that triggered a red
+alert on April 15.
 
-Although the investigation into the magnitude 3.1 event is underway, it is important to keep in mind that this earthquake is still quite small and unlikely to cause damage. For example, the United States Geological Survey indicates earthquakes don't usually cause damage below magnitude 4 or 5[^a] and, for comparison, California regularly experiences over 50 earthquakes above magnitude 3.0 each month [^b].
-
+Although the investigation into the magnitude 3.1 event is underway, it is important to keep in mind that this
+earthquake is still quite small and unlikely to cause damage. For example, the United States Geological Survey indicates
+earthquakes below magnitude 4 or 5 rarely cause damage[^a] and, for comparison, California regularly experiences
+over 50 earthquakes above magnitude 3.0 each month [^b].
 
 ```{python}
 #| echo: false
 #| label: fig-mag_time
-#| fig-cap: Seismic events and magnitudes associated with the circulation test. The vertical lines show the times a TLS alert was issued. 
+#| fig-cap: Seismic events and magnitudes associated with the circulation test. The Vertical lines indicate the times TLS alerts were issued. 
 
 from forgery.data import shp_data, csv_data, get_well_data
 from forgery.plot import plot_event_mag_time
@@ -53,8 +103,8 @@ chart = (
 chart.show()
 ```
 
-Examining the event locations (@fig-event_map), earthquakes tend to cluster along two distinct zones elongated in the north–south direction. This could indicate fluid moving along existing joints or faults oriented in this direction.   
-
+Examining the event locations (@fig-event_map), earthquakes tend to cluster along two distinct zones elongated in the
+north–south direction. This may indicate fluid movement along preexisting joints or faults oriented in that direction.
 
 ```{python}
 #| echo: false
@@ -92,8 +142,8 @@ chart = (
 chart.show()
 ```
 
-The following figure provides an interactive view of the events with magnitude >= -0.5 in relation to the surface, the granitoid (the igneous rock where the heat is stored), and the wells.
-
+The following figure provides an interactive view of the events with magnitude >= -0.5 in relation to the surface, the
+granitoid (the igneous rock where the heat is stored), and the wells.
 
 ```{python}
 #| echo: false
@@ -118,9 +168,9 @@ Induced seismicity can raise concerns. That’s why the Utah FORGE team takes pr
 
 - Data-informed modeling supports safer future geothermal developments.
 
-This test demonstrates that well-designed experiments, supported by real-time monitoring, help advance geothermal technology without compromising public safety.
+This test demonstrates that well-designed experiments, supported by real-time monitoring, help advance geothermal
+technology without compromising public safety.
 
-
-[^a]: [What magnitude does damage begin?](https://www.usgs.gov/faqs/what-magnitude-does-damage-begin-occur-earthquake) 
+[^a]: [What magnitude does damage begin?](https://www.usgs.gov/faqs/what-magnitude-does-damage-begin-occur-earthquake)
 
 [^b]: [Are we ready for the big one?](https://www.nbcsandiego.com/news/local/series-of-earthquakes-shake-socal-are-we-prepared-for-the-big-one/3610798/#:~:text=In%20California%2C%2055%20earthquakes%20of,and%20occurred%20in%20Southern%20California)

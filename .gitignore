@@ -83,3 +83,7 @@ figure-html
 blog_files
 blog.html
 blog.quarto_ipynb
+_site
+site_libs
+
+/.quarto/
