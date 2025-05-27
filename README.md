@@ -12,7 +12,7 @@ uv run pytest
 # Render the blog.
 uv run quarto render blog.qmd
 # Rename the blog to index.html so it works with gh pages
-mv blog.html index.html
+mv _site/blog.html index.html
 ```
 
 Then open index.html in your browser of choice. 

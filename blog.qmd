@@ -33,7 +33,7 @@ The **triggers** for the TLS include:
 - **Stimulation zone**: Events cluster in a single stimulation zone.
 - **M≥2(3km)**: An event with a magnitude 2 or greater occurred within 3 km of the reservoir.
 - **M≥3(5km)**: An event with a magnitude 3 or greater occurred within 5 km of the reservoir.
-- **M≥3(5-15km)**: An event with a magnitude 3 or greater occurred between 5 and 15 km of the reservoir.
+- **M≥3(5-15km)**: An event with a magnitude 3 or greater occurred between 5 and 15 km of the reservoir. It is unlikely the event is related to FORGE but merits careful observation. 
 
 The **responses** for the TLS are:
 
@@ -50,13 +50,12 @@ The **responses** for the TLS are:
 | Trigger | Response |
 |--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | Normal | No action. |
+| M≥3(5-15km)                    | Notify WSM |
 | 10M≥1(3km)                     | Notify WSM. |
-| 10M≥1(3km) and stimulation zone | Open shut-ins, reduce injection by 10%. If more M≥1(3km) events occur, continue to reduce
-injection by 10% increments. When green conditions return continue with operational plan. |
+| 10M≥1(3km) and stimulation zone | Open shut-ins, reduce injection by 10%. If more M≥1(3km) events occur, continue to reduce injection by 10% increments. When green conditions return continue with operational plan. |
 | 10M≥1(3km) and fault plane | Open shut-ins, flowback |
 | M≥2(3km)                       | Notify WSM, shutdown |
 | M≥3(5km)                       | Notify WSM, flowback, secure well |
-| M≥3(5-15km)                    | Notify WSM, flowback, secure well |
 :::
 
 ## Observations

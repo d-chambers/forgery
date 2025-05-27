@@ -12,18 +12,22 @@
   background-color: #f8d7da;
 }
 
+tr:nth-child(0) td {
+  background-color: #000000;
+}
+
 tr:nth-child(1),
-td {
+tr:nth-child(2) td {
   background-color: #d4edda; /* Green */
 }
 
-tr:nth-child(2),
 tr:nth-child(3),
-tr:nth-child(4) td {
+tr:nth-child(4),
+tr:nth-child(5) td {
   background-color: #fff3cd; /* Amber */
 }
 
-tr:nth-child(5),
-tr:nth-child(6) td {
+tr:nth-child(6),
+tr:nth-child(7) td {
   background-color: #f8d7da; /* Red */
 }
